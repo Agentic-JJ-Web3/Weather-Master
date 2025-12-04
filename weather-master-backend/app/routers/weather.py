@@ -6,6 +6,7 @@ from app.models.weather import (
     CompleteSuggestions
 )
 from app.services import weather_service, suggestion_service
+from app.services.gemini_service import gemini_service
 from typing import List
 
 router = APIRouter()
@@ -54,22 +55,41 @@ async def get_forecast(
 @router.post("/suggestions", response_model=CompleteSuggestions)
 async def get_complete_suggestions(request: LocationRequest):
     """
-    Get complete weather data with clothing and activity suggestions.
+    Get complete weather data with AI-powered clothing and activity suggestions.
     
     Args:
         request: Location request with city name
     
     Returns:
-        Complete suggestions including weather, forecast, clothing, and activities
+        Complete suggestions including weather, forecast, AI-generated clothing, and activities
     """
     try:
         # Get weather data
         weather_data = await weather_service.get_current_weather(request.location)
         forecast_data = await weather_service.get_forecast(request.location, 5)
         
-        # Generate suggestions
-        clothing = suggestion_service.get_clothing_suggestions(weather_data)
-        activities = suggestion_service.get_activity_suggestions(weather_data)
+        # Try to generate AI-powered suggestions
+        clothing = []
+        activities = []
+        
+        if gemini_service.enabled:
+            try:
+                # Use Gemini AI for intelligent suggestions
+                clothing_raw = await gemini_service.generate_clothing_suggestions(weather_data, forecast_data)
+                activities_raw = await gemini_service.generate_activity_suggestions(weather_data, forecast_data)
+                
+                # Convert to proper model format
+                from app.models.weather import ClothingSuggestion, ActivitySuggestion
+                clothing = [ClothingSuggestion(**item) for item in clothing_raw] if clothing_raw else []
+                activities = [ActivitySuggestion(**item) for item in activities_raw] if activities_raw else []
+            except Exception as e:
+                print(f"AI suggestion generation failed, using fallback: {str(e)}")
+        
+        # Fallback to rule-based suggestions if AI is disabled or failed
+        if not clothing:
+            clothing = suggestion_service.get_clothing_suggestions(weather_data)
+        if not activities:
+            activities = suggestion_service.get_activity_suggestions(weather_data)
         
         # Combine all data
         return CompleteSuggestions(

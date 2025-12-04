@@ -97,7 +97,7 @@ Visit these URLs to verify:
 In the "Environment Variables" section, add:
 
 ```
-NEXT_PUBLIC_API_URL=https://your-backend-url.onrender.com
+NEXT_PUBLIC_API_URL=https://weather-master-api.onrender.com
 ```
 
 > [!IMPORTANT]
@@ -108,14 +108,14 @@ NEXT_PUBLIC_API_URL=https://your-backend-url.onrender.com
 1. Click "Deploy"
 2. Vercel will build and deploy your frontend
 3. Wait for deployment (usually 1-3 minutes)
-4. Your app will be available at: `https://weather-master-xxx.vercel.app`
+4. Your app will be available at: `https://weather-master-three.vercel.app`
 
 ### Step 5: Update Backend CORS
 
 Go back to Render and update the `CORS_ORIGINS` environment variable:
 
 ```
-CORS_ORIGINS=https://your-frontend-url.vercel.app
+CORS_ORIGINS=https:/weather-master-three.vercel.app
 ```
 
 Then redeploy the backend service.
@@ -135,7 +135,7 @@ Then redeploy the backend service.
 
 ## 🧪 Testing Your Deployed App
 
-1. Visit your Vercel URL: `https://your-app.vercel.app`
+1. Visit your Vercel URL: `https://weather-master-three.vercel.app`
 2. Enter a city name (e.g., "London")
 3. Click "Search"
 4. Verify all features work:
