@@ -22,7 +22,7 @@ export default function ClothingSuggestions({ suggestions }: ClothingSuggestions
     useEffect(() => {
         if (containerRef.current) {
             const cards = containerRef.current.querySelectorAll('.clothing-card');
-            staggerIn(Array.from(cards), 0.4, 0.1, 0.7);
+            staggerIn(Array.from(cards) as HTMLElement[], 0.4, 0.1, 0.7);
         }
     }, [suggestions]);
 

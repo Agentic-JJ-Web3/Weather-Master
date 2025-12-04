@@ -18,7 +18,7 @@ export default function WeatherCard({ weather }: WeatherCardProps) {
 
         if (metricsRef.current) {
             const metrics = metricsRef.current.querySelectorAll('.metric-item');
-            staggerIn(Array.from(metrics), 0.3, 0.1, 0.5);
+            staggerIn(Array.from(metrics) as HTMLElement[], 0.3, 0.1, 0.5);
         }
     }, [weather]);
 

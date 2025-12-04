@@ -42,7 +42,7 @@ export default function ActivitySuggestions({ suggestions }: ActivitySuggestions
     useEffect(() => {
         if (containerRef.current) {
             const cards = containerRef.current.querySelectorAll('.activity-card');
-            staggerIn(Array.from(cards), 0.4, 0.1, 0.9);
+            staggerIn(Array.from(cards) as HTMLElement[], 0.4, 0.1, 0.9);
 
             // Animate progress bars
             const progressBars = containerRef.current.querySelectorAll('.progress-bar');
