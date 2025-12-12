@@ -26,7 +26,7 @@ const ProjectInfo = () => {
                 <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
                     Weather Master is an advanced weather forecasting application that goes beyond simple temperature readings.
                     Leveraging the power of Artificial Intelligence, it provides personalized clothing recommendations and activity suggestions
-                    tailored to the specific weather conditions of your location. Whether you're planning a hike, a coffee run, or just
+                    tailored to the specific weather conditions of your location. Whether you&apos;re planning a hike, a coffee run, or just
                     wondering what to wear, Weather Master has you covered.
                 </p>
             </div>
