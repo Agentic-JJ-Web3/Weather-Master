@@ -5,20 +5,20 @@ import { gsap } from 'gsap';
  */
 export const fadeIn = (
     element: HTMLElement | null,
-    duration: number = 0.6,
+    duration: number = 0.8,
     delay: number = 0
 ) => {
     if (!element) return;
 
     gsap.fromTo(
         element,
-        { opacity: 0, scale: 0.95 },
+        { opacity: 0, scale: 0.98 },
         {
             opacity: 1,
             scale: 1,
             duration,
             delay,
-            ease: 'power2.out',
+            ease: 'power3.out',
         }
     );
 };
@@ -29,16 +29,16 @@ export const fadeIn = (
 export const slideIn = (
     element: HTMLElement | null,
     direction: 'left' | 'right' | 'top' | 'bottom' = 'bottom',
-    duration: number = 0.6,
+    duration: number = 0.8,
     delay: number = 0
 ) => {
     if (!element) return;
 
     const directions = {
-        left: { x: -50, y: 0 },
-        right: { x: 50, y: 0 },
-        top: { x: 0, y: -50 },
-        bottom: { x: 0, y: 50 },
+        left: { x: -30, y: 0 },
+        right: { x: 30, y: 0 },
+        top: { x: 0, y: -30 },
+        bottom: { x: 0, y: 30 },
     };
 
     const { x, y } = directions[direction];
@@ -62,15 +62,15 @@ export const slideIn = (
  */
 export const staggerIn = (
     elements: HTMLElement[] | NodeListOf<Element>,
-    duration: number = 0.5,
-    stagger: number = 0.1,
+    duration: number = 0.8,
+    stagger: number = 0.15,
     delay: number = 0
 ) => {
     if (!elements || elements.length === 0) return;
 
     gsap.fromTo(
         elements,
-        { opacity: 0, y: 30, scale: 0.95 },
+        { opacity: 0, y: 20, scale: 0.98 },
         {
             opacity: 1,
             y: 0,
@@ -78,7 +78,7 @@ export const staggerIn = (
             duration,
             stagger,
             delay,
-            ease: 'power2.out',
+            ease: 'power3.out',
         }
     );
 };
@@ -91,8 +91,8 @@ export const scaleOnHover = (element: HTMLElement | null) => {
 
     element.addEventListener('mouseenter', () => {
         gsap.to(element, {
-            scale: 1.05,
-            duration: 0.3,
+            scale: 1.02,
+            duration: 0.4,
             ease: 'power2.out',
         });
     });
@@ -100,7 +100,7 @@ export const scaleOnHover = (element: HTMLElement | null) => {
     element.addEventListener('mouseleave', () => {
         gsap.to(element, {
             scale: 1,
-            duration: 0.3,
+            duration: 0.4,
             ease: 'power2.out',
         });
     });
@@ -112,7 +112,7 @@ export const scaleOnHover = (element: HTMLElement | null) => {
 export const rotateIcon = (
     element: HTMLElement | null,
     rotation: number = 180,
-    duration: number = 0.5
+    duration: number = 0.6
 ) => {
     if (!element) return;
 
@@ -129,7 +129,7 @@ export const rotateIcon = (
 export const animateProgressBar = (
     element: HTMLElement | null,
     targetWidth: string,
-    duration: number = 1
+    duration: number = 1.2
 ) => {
     if (!element) return;
 
@@ -139,7 +139,7 @@ export const animateProgressBar = (
         {
             width: targetWidth,
             duration,
-            ease: 'power2.out',
+            ease: 'power3.out',
         }
     );
 };
@@ -157,20 +157,20 @@ export const pageEntranceSequence = (elements: {
     if (title) {
         gsap.fromTo(
             title,
-            { opacity: 0, y: -30 },
-            { opacity: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'power3.out' }
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 1, delay: 0.2, ease: 'power3.out' }
         );
     }
 
     if (subtitle) {
-        fadeIn(subtitle, 0.6, 0.4);
+        fadeIn(subtitle, 0.8, 0.5);
     }
 
     if (searchBar) {
         gsap.fromTo(
             searchBar,
-            { opacity: 0, scale: 0.9 },
-            { opacity: 1, scale: 1, duration: 0.6, delay: 0.6, ease: 'back.out(1.2)' }
+            { opacity: 0, scale: 0.95 },
+            { opacity: 1, scale: 1, duration: 0.8, delay: 0.7, ease: 'back.out(1.2)' }
         );
     }
 };
